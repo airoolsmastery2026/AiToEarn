@@ -94,7 +94,15 @@ export class VideoFactoryService {
   }
 
   private normalizeRequest(input: VideoFactoryRequest): VideoFactoryResolvedRequest {
-    const topic = input.topic?.trim()
+    if (!input || typeof input !== 'object') {
+      throw new BadRequestException('request body is required')
+    }
+
+    if (typeof input.topic !== 'string') {
+      throw new BadRequestException('topic must be a string')
+    }
+
+    const topic = input.topic.trim()
     if (!topic) {
       throw new BadRequestException('topic is required')
     }
@@ -110,8 +118,16 @@ export class VideoFactoryService {
     }
 
     const durationSeconds = input.durationSeconds ?? 60
-    if (!Number.isFinite(durationSeconds) || durationSeconds < 5 || durationSeconds > 3600) {
-      throw new BadRequestException('durationSeconds must be between 5 and 3600')
+    if (!Number.isFinite(durationSeconds) || !Number.isInteger(durationSeconds) || durationSeconds < 5 || durationSeconds > 3600) {
+      throw new BadRequestException('durationSeconds must be an integer between 5 and 3600')
+    }
+
+    if (input.allowPaidProviders !== undefined && typeof input.allowPaidProviders !== 'boolean') {
+      throw new BadRequestException('allowPaidProviders must be a boolean')
+    }
+
+    if (input.approvalGate !== undefined && typeof input.approvalGate !== 'boolean') {
+      throw new BadRequestException('approvalGate must be a boolean')
     }
 
     return {
