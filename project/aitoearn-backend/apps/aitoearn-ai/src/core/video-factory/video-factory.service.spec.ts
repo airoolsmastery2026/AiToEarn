@@ -1,3 +1,4 @@
+import type { VideoFactoryRequest } from './video-factory.types'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { VideoFactoryProviderRouter } from './video-factory-provider-router.service'
 import { VideoFactoryService } from './video-factory.service'
@@ -55,5 +56,14 @@ describe('VideoFactoryService', () => {
 
     expect(videoStage?.providerId).toBe('local-video-model')
     expect(plan.estimatedPaidProviderCount).toBe(0)
+  })
+
+  it('rejects string values that could accidentally unlock paid providers', () => {
+    const invalidRequest = {
+      topic: 'A short construction explainer',
+      allowPaidProviders: 'false',
+    } as unknown as VideoFactoryRequest
+
+    expect(() => createService().createPlan(invalidRequest)).toThrow('allowPaidProviders must be a boolean')
   })
 })
