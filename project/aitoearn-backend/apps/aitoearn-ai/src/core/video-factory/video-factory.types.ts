@@ -21,7 +21,12 @@ export interface VideoFactoryProviderDefinition {
   costTier: VideoFactoryCostTier
   priority: number
   enabledByDefault: boolean
+  requiredEnv?: string
   setupHint?: string
+}
+
+export interface VideoFactoryProviderStatus extends VideoFactoryProviderDefinition {
+  configured: boolean
 }
 
 export interface VideoFactoryRequest {
