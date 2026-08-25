@@ -14,6 +14,7 @@ import { AiAvailabilityModule } from './core/ai-availability'
 import { AiModule } from './core/ai/ai.module'
 import { DraftGenerationModule } from './core/draft-generation'
 import { InternalModule } from './core/internal'
+import { VideoFactoryModule } from './core/video-factory/video-factory.module'
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { InternalModule } from './core/internal'
     AgentModule,
     InternalModule,
     DraftGenerationModule,
+    VideoFactoryModule,
   ],
   controllers: [],
   providers: [],
