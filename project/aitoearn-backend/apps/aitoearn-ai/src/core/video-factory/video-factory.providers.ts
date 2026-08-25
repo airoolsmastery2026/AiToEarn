@@ -2,20 +2,22 @@ import type { VideoFactoryProviderDefinition } from './video-factory.types'
 
 export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] = [
   {
-    id: 'aitoearn-ai-script',
-    label: 'AiToEarn AI Script',
-    capability: 'script',
-    costTier: 'free',
-    priority: 10,
-    enabledByDefault: true,
-  },
-  {
     id: 'public-web-research',
     label: 'Public Web Research',
     capability: 'research',
     costTier: 'free',
     priority: 10,
     enabledByDefault: true,
+  },
+  {
+    id: 'local-llm-script',
+    label: 'Local LLM Script',
+    capability: 'script',
+    costTier: 'local',
+    priority: 10,
+    enabledByDefault: true,
+    requiredEnv: 'VIDEO_FACTORY_LOCAL_LLM_ENDPOINT',
+    setupHint: 'Point VIDEO_FACTORY_LOCAL_LLM_ENDPOINT at an Ollama/OpenAI-compatible local endpoint.',
   },
   {
     id: 'public-domain-assets',
@@ -32,7 +34,8 @@ export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] 
     costTier: 'local',
     priority: 10,
     enabledByDefault: true,
-    setupHint: 'Install Piper and expose its executable to the runtime.',
+    requiredEnv: 'VIDEO_FACTORY_PIPER_PATH',
+    setupHint: 'Set VIDEO_FACTORY_PIPER_PATH to the Piper executable.',
   },
   {
     id: 'local-video-model',
@@ -41,7 +44,8 @@ export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] 
     costTier: 'local',
     priority: 10,
     enabledByDefault: true,
-    setupHint: 'Connect a local WAN/LTX/Hunyuan/CogVideo-compatible adapter when GPU capacity is available.',
+    requiredEnv: 'VIDEO_FACTORY_LOCAL_VIDEO_ENDPOINT',
+    setupHint: 'Point VIDEO_FACTORY_LOCAL_VIDEO_ENDPOINT at a local WAN/LTX/Hunyuan/CogVideo-compatible adapter.',
   },
   {
     id: 'aitoearn-native-video',
@@ -50,7 +54,7 @@ export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] 
     costTier: 'paid',
     priority: 100,
     enabledByDefault: true,
-    setupHint: 'Uses the existing AiToEarn cloud video provider layer and is only eligible when paid providers are explicitly allowed.',
+    setupHint: 'Uses the existing AiToEarn cloud video provider layer and is eligible only when paid providers are explicitly allowed.',
   },
   {
     id: 'ffmpeg-local',
@@ -59,15 +63,18 @@ export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] 
     costTier: 'local',
     priority: 10,
     enabledByDefault: true,
-    setupHint: 'Install FFmpeg and expose its executable to the runtime.',
+    requiredEnv: 'VIDEO_FACTORY_FFMPEG_PATH',
+    setupHint: 'Set VIDEO_FACTORY_FFMPEG_PATH to the FFmpeg executable.',
   },
   {
-    id: 'aitoearn-ai-qa',
-    label: 'AiToEarn AI QA',
+    id: 'local-llm-qa',
+    label: 'Local LLM QA',
     capability: 'qa',
-    costTier: 'free',
+    costTier: 'local',
     priority: 10,
     enabledByDefault: true,
+    requiredEnv: 'VIDEO_FACTORY_LOCAL_LLM_ENDPOINT',
+    setupHint: 'Uses the same local LLM endpoint as script generation.',
   },
   {
     id: 'ffmpeg-export',
@@ -76,6 +83,7 @@ export const VIDEO_FACTORY_PROVIDERS: readonly VideoFactoryProviderDefinition[] 
     costTier: 'local',
     priority: 10,
     enabledByDefault: true,
-    setupHint: 'Install FFmpeg and expose its executable to the runtime.',
+    requiredEnv: 'VIDEO_FACTORY_FFMPEG_PATH',
+    setupHint: 'Set VIDEO_FACTORY_FFMPEG_PATH to the FFmpeg executable.',
   },
 ] as const
