@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0",
+  "provider": "aitoearn",
+  "role": "social-execution",
+  "transport": {
+    "preferred": "mcp",
+    "international": "https://aitoearn.ai/api/unified/mcp",
+    "china": "https://aitoearn.cn/api/unified/mcp"
+  },
+  "policies": {
+    "zeroCostFirst": true,
+    "paidProviderFallback": false,
+    "autonomousEngagementDefault": false,
+    "blindSideEffectRetry": false,
+    "secretsInGit": false
+  },
+  "operations": {
+    "capabilities.list": "listChannelPlatforms",
+    "capabilities.get": "getChannelPlatform",
+    "publish.create": "createChannelPublishFlow",
+    "publish.now": "publishChannelTaskNow",
+    "publish.cancel": "cancelChannelPublishTask",
+    "publish.reschedule": "updateChannelPublishAt",
+    "publish.update": "requestChannelPublishUpdate",
+    "publish.records.list": "listChannelPublishRecords",
+    "publish.record.byTask": "getChannelPublishRecordByTaskId",
+    "publish.record.byFlow": "getChannelPublishRecordByFlowId",
+    "publish.record.byId": "getChannelPublishRecordByRecordId",
+    "works.list": "listChannelWorks",
+    "works.get": "getChannelWorkDetail",
+    "analytics.account": "getChannelAccountAnalytics",
+    "analytics.work": "getChannelWorkAnalytics",
+    "engagement.comments.list": "listChannelEngagementComments",
+    "engagement.comment.create": "submitChannelEngagementComment",
+    "engagement.action": "callChannelEngagementFunction"
+  },
+  "integrationPriority": [
+    "Contractor-AI-OS",
+    "dai-hai-phat-web",
+    "ai-shopify-store-factory",
+    "Affiliate-Content-Factory",
+    "FormaVision-AI",
+    "TubeMaster-AI"
+  ]
+}
